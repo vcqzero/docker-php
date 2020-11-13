@@ -1,0 +1,23 @@
+version: "2.2"
+services: 
+  db:
+    image: mysql:5.7
+    container_name: mysql-5.7
+    environment: 
+      - MYSQL_ROOT_PASSWORD=123456
+    ports: 
+      - 3306:3306
+  web:
+    build: ./
+    image: php-fpm
+    container_name: php-7.4
+    depends_on:
+      - db
+    ports: 
+      - 8000:80
+    command: ["/start.sh"]
+    volumes: 
+      - /Users/qinchong/workplace/dockers/php/sites-enabled:/etc/nginx/sites-enabled
+      # 将应用映射到容器内/var/www中
+      # 然后在nginx中修改具体路径
+      - APPLICATION_PATH:/var/www/APPLICATION_NAME
