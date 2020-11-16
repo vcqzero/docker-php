@@ -8,6 +8,7 @@ ADD start.sh /
 COPY php.ini-development /usr/local/etc/php/php.ini
 
 # Install Zip Vim Ps
+RUN sed -i "s@http://deb.debian.org@http://mirrors.aliyun.com@g" /etc/apt/sources.list && rm -Rf /var/lib/apt/lists/* &&  cat /etc/apt/sources.list
 RUN apt-get update && apt-get install -y zip \
     && apt-get install -y vim \
     && apt-get install -y procps 
