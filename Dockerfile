@@ -1,20 +1,14 @@
 # Dockerfile
 FROM php:7.4-fpm
 
-# Add start.sh
-ADD start.sh /
-
 # 添加php.ini文件
 COPY php.ini-development /usr/local/etc/php/php.ini
 
 # Install Zip Vim Ps
 RUN sed -i "s@http://deb.debian.org@http://mirrors.aliyun.com@g" /etc/apt/sources.list && rm -Rf /var/lib/apt/lists/* &&  cat /etc/apt/sources.list
 RUN apt-get update && apt-get install -y zip \
-    && apt-get install -y vim \
+    # && apt-get install -y vim \
     && apt-get install -y procps 
-RUN chmod +x /start.sh
-# 安装nginx
-RUN apt-get update && apt-get install -y nginx
 # gd
 RUN apt-get update && apt-get install -y \ 
     libfreetype6-dev \
@@ -33,6 +27,5 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # 声明nginx配置文件挂载到容器中
 VOLUME [ "/etc/nginx/sites-enabled", "/var/www" ]
 
-# 定义需要暴露的接口
-# 8000:80
-EXPOSE 80 
+# php-fpm端口9000
+EXPOSE 9000

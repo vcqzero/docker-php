@@ -7,17 +7,23 @@ services:
       - MYSQL_ROOT_PASSWORD=123456
     ports: 
       - 3306:3306
-  web:
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports: 
+      - 8000:80
+    volumes: 
+      - {CONF.D PATH}:/etc/nginx/conf.d
+      # 此处的路径需要和php中的路径完成一致
+      - {APPLICATION_PATH}:/var/www/jjhy-api
+  php:
     build: ./
     image: php-fpm
     container_name: php-7.4
     depends_on:
       - db
+      - nginx
     ports: 
-      - 8000:80
-    command: ["/start.sh"]
+      - 9000:9000
     volumes: 
-      - /Users/qinchong/workplace/dockers/php/sites-enabled:/etc/nginx/sites-enabled
-      # 将应用映射到容器内/var/www中
-      # 然后在nginx中修改具体路径
-      - APPLICATION_PATH:/var/www/APPLICATION_NAME
+      - {APPLICATION_PATH}:/var/www/jjhy-api
