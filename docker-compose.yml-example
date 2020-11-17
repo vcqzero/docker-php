@@ -7,6 +7,9 @@ services:
       - MYSQL_ROOT_PASSWORD=123456
     ports: 
       - 3306:3306
+    volumes:
+      # 定义数据挂载券 
+      - your_data_path:/var/lib/mysql
   nginx:
     image: nginx
     container_name: nginx
