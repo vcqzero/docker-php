@@ -20,8 +20,16 @@ RUN docker-php-ext-install -j$(nproc) pdo_mysql
 # bcmath
 RUN docker-php-ext-install -j$(nproc) bcmath
 
+# Zip
+RUN apt-get update \
+    && apt-get install -y zlib1g-dev \
+    && apt-get install -y libzip-dev \
+    && docker-php-ext-install -j$(nproc) zip
+
+
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer 
+# composer self-update -r # 如果composer版本有问题，可以回滚版本
 # composer config repo.packagist composer https://packagist.phpcomposer.com
 
 # 声明nginx配置文件挂载到容器中

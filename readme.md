@@ -13,6 +13,9 @@ db
     - your_data_path:/var/lib/mysql
 ...
 ```
+连接mysql:
+host: `127.0.0.1`
+pass: `123456` // MYSQL_ROOT_PASSWORD
 
 第二步 Nginx设置
 
