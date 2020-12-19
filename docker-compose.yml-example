@@ -11,7 +11,7 @@ services:
       # 定义数据挂载券 
       - /home/qinchong/Workspace/docker-php-mysql-data:/var/lib/mysql
   nginx:
-    image: nginx
+    image: nginx:latest
     container_name: nginx
     depends_on: 
      # Nginx必须依赖php，都在报错
@@ -19,7 +19,7 @@ services:
     ports: 
       - 8000:80
     volumes: 
-      - /home/qinchong/Workspace/php-docker/conf.d:/etc/nginx/conf.d
+      - /home/qinchong/Workspace/docker-php/conf.d:/etc/nginx/conf.d
       - /home/qinchong/Workspace/jjhy-api-server:/var/www/jjhy-api
   php74:
     build: ./
@@ -28,4 +28,4 @@ services:
     depends_on:
       - mysql57
     volumes: 
-      - /Users/qinchong/workplace/jjhy/jjhy-api:/var/www/jjhy-api
+      - /home/qinchong/Workspace/jjhy-api-server:/var/www/jjhy-api

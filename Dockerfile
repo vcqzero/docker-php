@@ -29,7 +29,7 @@ RUN apt-get update \
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer 
-RUN composer self-update --1 # 使用1.x版本
+# RUN composer self-update --1 # 使用1.x版本
 # composer config repo.packagist composer https://packagist.phpcomposer.com
 
 # 声明nginx配置文件挂载到容器中
